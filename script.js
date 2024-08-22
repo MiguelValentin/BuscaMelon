@@ -66,7 +66,7 @@ function createBoard() {
             cell.classList.add('cell');
             cell.setAttribute('data-row', i);
             cell.setAttribute('data-col', j);
-            cell.addEventListener('mousedown', pol);
+            cell.addEventListener('mousedown', changeEmoji);
             cell.addEventListener('click', revealCell);
             cell.addEventListener('contextmenu', flagCell);
             gameElement.appendChild(cell);
@@ -93,8 +93,9 @@ function createBoard() {
     calculateAdjacentMines();
 }
 
-function pol(event)
-{
+function changeEmoji(event) {
+    if (isPlaying)
+        return;
     resetButton.textContent = '😬';
 }
 
