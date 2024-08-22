@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    background-image: url('background-pattern.png');
+    /* Imagen de fondo en patrón */
+    background-repeat: repeat;
+    /* Repetir la imagen en el fondo */
+}
+
+h1 {
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 0px; 
+    text-shadow: 2px 2px 4px #fcfcfc;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+#seed-label {
+    width: 150px;
+    padding: 10px;
+    font-size: 1.2em;
+    /* border: 2px solid #7f8c8d; */
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #7a7a7a;
+    text-align: center;
+    box-shadow: inset 0 0 5px rgba(139, 139, 139, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    
+}
+
+#seed-input {
+    width: 150px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #7f8c8d;
+    border-radius: 10px;
+    background-color: #ecf0f1;
+    color: #333;
+    text-align: center;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    /* Espacio debajo del input */
+}
+
+#seed-input:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+    outline: none;
+}
+
+#seed-input::placeholder {
+    color: #95a5a6;
+    font-style: italic;
+}
+
+#mines-counter,
+#timer {
+    font-size: 2em;
+    background-color: #333;
+    color: #e74c3c;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px #000, 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 80px;
+    text-align: center;
+}
+
+#reset-button {
+    font-size: 2em;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px #16a085;
+    transition: transform 0.2s;
+}
+
+#reset-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px #16a085;
+}
+
+#game {
+    display: grid;
+    grid-gap: 2px;
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    background-color: #bdc3c7;
+    border: 2px solid #7f8c8d;
+    text-align: center;
+    line-height: 36px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.cell:hover {
+    background-color: #95a5a6;
+}
+
+.cell.revealed {
+    background-color: #ecf0f1;
+    border-color: #bdc3c7;
+    box-shadow: inset 0 0 5px #7f8c8d;
+}
+
+.cell.mine {
+    background-color: #e74d3cce;
+    color: black;
+    background-image: url('mine.png');
+    /* background-size: 28px 28px; */
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #6e373b75;
+    /* Mantiene el borde del mismo color que el fondo */
+    transform: none;
+    /* Se desactiva cualquier transformación */
+    box-shadow: none;
+    /* Se elimina cualquier sombra */
+}
+
+.cell.flagged {
+    background-color: #f39c12;
+    border-color: #e67e22;
+}
+
+.cell.flagged:before {
+    content: '🚩';
+}
+
+.cell:active {
+    transform: scale(0.95);
+}
