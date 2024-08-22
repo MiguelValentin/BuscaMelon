@@ -11,6 +11,11 @@ let timer;
 let startTime;
 let minesRemaining = minesCount;
 let seed = '12345'; // Semilla por defecto
+
+let flagTimeout;
+let flagPlaced = false;
+
+
 var isPlaying = false;
 var isTime = true;
 // Función para inicializar el juego
@@ -49,6 +54,21 @@ function resetGame() {
 
 }
 
+function handlePointerDown(event) {
+    flagPlaced = false;  // Resetear el estado al presionar
+    flagTimeout = setTimeout(() => {
+        flagCell(event);  // Colocar la bandera
+        flagPlaced = true;  // Marcar que la bandera ha sido colocada
+    }, 150);  // Tiempo de espera reducido (en milisegundos)
+}
+
+function handlePointerUp(event) {
+    if (!flagPlaced) {
+        clearTimeout(flagTimeout);  // Cancela la acción si no se ha colocado la bandera
+    }
+}
+
+
 
 // Función para crear el tablero de juego
 function createBoard() {
@@ -68,8 +88,19 @@ function createBoard() {
             cell.setAttribute('data-col', j);
             cell.addEventListener('mousedown', changeEmoji);
             cell.addEventListener('pointerdown', changeEmoji);
+
+            cell.addEventListener('pointerdown', handlePointerDown);
+            cell.addEventListener('pointerup', handlePointerUp);
+            cell.addEventListener('pointerleave', handlePointerUp);  // Para cuando se arrastra fuera de la celda
+
+
             cell.addEventListener('click', revealCell);
-            cell.addEventListener('contextmenu', flagCell);
+            cell.addEventListener('contextmenu', function (event) {
+
+                event.preventDefault();  // Previene el menú contextual por defecto
+                if (!flagPlaced)
+                    flagCell(event);
+            });
             gameElement.appendChild(cell);
             gameBoard[i][j] = {
                 element: cell,
@@ -220,7 +251,7 @@ function showWinPopup() {
         spread: 120,
         origin: { y: 0.7 },
         ticks: 70,
-    }); 
+    });
     // Configuración adicional para hacer que el confeti sea más continuo
     var duration = 5 * 50; // Duración del confeti en milisegundos
     var end = Date.now() + duration;
