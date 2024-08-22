@@ -45,6 +45,7 @@ function resetGame() {
     clearInterval(timer);
     timerElement.textContent = '000';
     createBoard();
+    resetButton.textContent = '😊';
 
 }
 
@@ -65,6 +66,7 @@ function createBoard() {
             cell.classList.add('cell');
             cell.setAttribute('data-row', i);
             cell.setAttribute('data-col', j);
+            cell.addEventListener('mousedown', pol);
             cell.addEventListener('click', revealCell);
             cell.addEventListener('contextmenu', flagCell);
             gameElement.appendChild(cell);
@@ -83,12 +85,17 @@ function createBoard() {
     // const cellSize = Math.min(containerWidth / cols, containerHeight / rows);
 
     // console.log(`El tamaño de la celda es: ${cellWidth}px x ${cellHeight}px`);
-    
+
     // Ajustar las filas y columnas del grid con el tamaño calculado
     gameElement.style.gridTemplateRows = `repeat(${rows}, ${cellWidth}px)`;
     gameElement.style.gridTemplateColumns = `repeat(${cols}, ${cellHeight}px)`;
     plantMines();
     calculateAdjacentMines();
+}
+
+function pol(event)
+{
+    resetButton.textContent = '😬';
 }
 
 // Función para plantar minas usando la semilla
@@ -165,6 +172,7 @@ function revealCell(event) {
             isPlaying = true;
             // setTimeout(resetGame, 2000);
         } else {
+            resetButton.textContent = '😊';
             cell.element.textContent = cell.adjacentMines > 0 ? cell.adjacentMines : '';
             if (cell.adjacentMines === 0) {
                 revealAdjacentCells(row, col);
@@ -239,6 +247,7 @@ function flagCell(event) {
         }
         minesCounterElement.textContent = formatNumber(minesRemaining);
     }
+    resetButton.textContent = '🫣';
     checkingMines();
 }
 
@@ -255,6 +264,12 @@ function revealAllMines() {
             }
         }
     }
+    showSadFace();
+}
+
+// Función para cambiar el emoji cuando el jugador pierde
+function showSadFace() {
+    resetButton.textContent = '😭'; // Cambiar el emoji a una carita triste
 }
 
 // Función para actualizar el temporizador
