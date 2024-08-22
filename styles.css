@@ -124,7 +124,7 @@ h1 {
     background-color: #bdc3c7;
     border: 2px solid #7f8c8d;
     text-align: center;
-    line-height: 36px;
+    line-height: 38px;
     font-size: 1.5em;
     cursor: pointer;
     border-radius: 5px;
@@ -210,5 +210,11 @@ h1 {
         max-width: 40px; /* Tamaño máximo para pantallas pequeñas */
         max-height: 40px;
         font-size: 1.2em; /* Reducir el tamaño de la fuente */
+    }
+}
+
+@media (max-width: 380px) {
+    .cell {
+        line-height: 30px;
     }
 }
