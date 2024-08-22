@@ -158,6 +158,20 @@ function revealCell(event) {
             }
         }
     }
+    checkingMines();
+}
+
+function checkingMines() {
+    if (minesRemaining != 0)
+        return;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (gameBoard[i][j].mine && !gameBoard[i][j].flagged) {
+                return
+            }
+        }
+    }
+    isPlaying = true;
 }
 
 function revealAdjacentCells(row, col) {
@@ -176,12 +190,17 @@ function revealAdjacentCells(row, col) {
 }
 
 function flagCell(event) {
+
+
+    event.preventDefault();
     if (isPlaying)
         return;
-    event.preventDefault();
     let row = event.target.getAttribute('data-row');
     let col = event.target.getAttribute('data-col');
+
     let cell = gameBoard[row][col];
+    if (minesRemaining == 0 && !cell.flagged)
+        return;
     if (!cell.revealed) {
         cell.flagged = !cell.flagged;
         cell.element.classList.toggle('flagged');
