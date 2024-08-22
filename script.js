@@ -1,6 +1,6 @@
 const rows = 10;
 const cols = 10;
-const minesCount = 15;
+const minesCount = 1;
 let gameBoard = [];
 let gameElement = document.getElementById('game');
 let minesCounterElement = document.getElementById('mines-counter');
@@ -214,6 +214,37 @@ function showWinPopup() {
     closeBtn.addEventListener('click', () => {
         winPopup.style.display = 'none';
     });
+    // Lanzar confeti
+    confetti({
+        particleCount: 150,
+        spread: 120,
+        origin: { y: 0.7 },
+        ticks: 70,
+    }); 
+    // Configuración adicional para hacer que el confeti sea más continuo
+    var duration = 5 * 50; // Duración del confeti en milisegundos
+    var end = Date.now() + duration;
+
+    (function frame() {
+        confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            ticks: 70,
+        });
+        confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            ticks: 70,
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+    })();
 }
 
 function revealAdjacentCells(row, col) {
@@ -283,7 +314,7 @@ function revealAllMines() {
         }
 
         if (!cell.revealed) {
-            cell.element.classList.add( 'mine', 'exploding'); // Añadir la clase 'exploding'
+            cell.element.classList.add('mine', 'exploding'); // Añadir la clase 'exploding'
         }
         setTimeout(() => {
             cell.element.classList.remove('exploding'); // Remover la clase después de la animación
