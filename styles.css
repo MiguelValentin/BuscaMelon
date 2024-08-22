@@ -145,6 +145,7 @@ h1 {
     background-color: #e74d3cce;
     color: black;
     background-image: url('mine.png');
+    background-size: contain;
     /* background-size: 28px 28px; */
     background-position: center;
     background-repeat: no-repeat;
