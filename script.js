@@ -67,6 +67,7 @@ function createBoard() {
             cell.setAttribute('data-row', i);
             cell.setAttribute('data-col', j);
             cell.addEventListener('mousedown', changeEmoji);
+            cell.addEventListener('pointerdown', changeEmoji);
             cell.addEventListener('click', revealCell);
             cell.addEventListener('contextmenu', flagCell);
             gameElement.appendChild(cell);
@@ -96,7 +97,12 @@ function createBoard() {
 function changeEmoji(event) {
     if (isPlaying)
         return;
-    resetButton.textContent = '😬';
+    let row = event.target.getAttribute('data-row');
+    let col = event.target.getAttribute('data-col');
+    let cell = gameBoard[row][col];
+    if (!cell.revealed && !cell.flagged) {
+        resetButton.textContent = '😬';
+    }
 }
 
 // Función para plantar minas usando la semilla
