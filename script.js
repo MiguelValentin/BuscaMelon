@@ -187,6 +187,18 @@ function checkingMines() {
         }
     }
     isPlaying = true;
+    showWinPopup();
+}
+
+function showWinPopup() {
+    const winPopup = document.getElementById('win-popup');
+    winPopup.style.display = 'flex'; // Mostrar el popup
+
+    // Añadir evento para cerrar el popup
+    const closeBtn = document.getElementById('close-popup');
+    closeBtn.addEventListener('click', () => {
+        winPopup.style.display = 'none';
+    });
 }
 
 function revealAdjacentCells(row, col) {
