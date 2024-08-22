@@ -1,6 +1,6 @@
 const rows = 10;
 const cols = 10;
-const minesCount = 1;
+const minesCount = 15;
 let gameBoard = [];
 let gameElement = document.getElementById('game');
 let minesCounterElement = document.getElementById('mines-counter');
