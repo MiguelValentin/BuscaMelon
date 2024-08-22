@@ -81,7 +81,9 @@ function createBoard() {
     const cellWidth = firstCell.offsetWidth; // Obtiene el ancho de la celda en píxeles
     const cellHeight = firstCell.offsetHeight; // Obtiene la altura de la celda en píxeles
     // const cellSize = Math.min(containerWidth / cols, containerHeight / rows);
-    console.log(`El tamaño de la celda es: ${cellWidth}px x ${cellHeight}px`);
+
+    // console.log(`El tamaño de la celda es: ${cellWidth}px x ${cellHeight}px`);
+    
     // Ajustar las filas y columnas del grid con el tamaño calculado
     gameElement.style.gridTemplateRows = `repeat(${rows}, ${cellWidth}px)`;
     gameElement.style.gridTemplateColumns = `repeat(${cols}, ${cellHeight}px)`;
@@ -178,7 +180,9 @@ function checkingMines() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (gameBoard[i][j].mine && !gameBoard[i][j].flagged) {
-                return
+                return;
+            } else if (!gameBoard[i][j].mine && !gameBoard[i][j].revealed) {
+                return;
             }
         }
     }
@@ -198,6 +202,7 @@ function revealAdjacentCells(row, col) {
             }
         }
     }
+
 }
 
 function flagCell(event) {
@@ -222,6 +227,7 @@ function flagCell(event) {
         }
         minesCounterElement.textContent = formatNumber(minesRemaining);
     }
+    checkingMines();
 }
 
 function revealAllMines() {
