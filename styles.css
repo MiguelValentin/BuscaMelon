@@ -13,13 +13,13 @@ body {
     /* Imagen de fondo en patrón */
     background-repeat: repeat;
     /* Repetir la imagen en el fondo */
-    
+
 }
 
 h1 {
     font-size: 3em;
     color: #333;
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
     text-shadow: 2px 2px 4px #fcfcfc;
     background-color: #ffffff;
     border-radius: 10px;
@@ -33,7 +33,8 @@ h1 {
     justify-content: space-between;
     width: 250px;
     margin-bottom: 20px;
-    max-width: 300px; /* Limitar el ancho máximo del encabezado */
+    max-width: 300px;
+    /* Limitar el ancho máximo del encabezado */
 }
 
 #seed-label {
@@ -48,7 +49,7 @@ h1 {
     box-shadow: inset 0 0 5px rgba(139, 139, 139, 0.1);
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 20px;
-    
+
 }
 
 #seed-input {
@@ -117,10 +118,14 @@ h1 {
 }
 
 .cell {
-    width: 10vw; /* Las celdas se ajustan en base al ancho de la pantalla */
-    height: 10vw; /* Mantiene una proporción cuadrada */
-    max-width: 40px; /* Tamaño máximo para pantallas grandes */
-    max-height: 40px; /* Tamaño máximo para pantallas grandes */
+    width: 10vw;
+    /* Las celdas se ajustan en base al ancho de la pantalla */
+    height: 10vw;
+    /* Mantiene una proporción cuadrada */
+    max-width: 40px;
+    /* Tamaño máximo para pantallas grandes */
+    max-height: 40px;
+    /* Tamaño máximo para pantallas grandes */
     background-color: #bdc3c7;
     border: 2px solid #7f8c8d;
     text-align: center;
@@ -139,6 +144,42 @@ h1 {
     background-color: #ecf0f1;
     border-color: #bdc3c7;
     box-shadow: inset 0 0 5px #7f8c8d;
+    animation: revealAnimation 0.15s ease-in-out;
+}
+
+
+@keyframes revealAnimation {
+    0% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes explosion {
+    0% {
+        transform: scale(0.25);
+        opacity: 1;
+        background-color: rgb(255, 255, 255);
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.8;
+        background-color: rgb(255, 0, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        background-color: #ffffffce;
+    }
+}
+
+.mine.exploding {
+    animation: explosion 0.25s ease-out;
 }
 
 .cell.mine {
@@ -149,7 +190,7 @@ h1 {
     /* background-size: 28px 28px; */
     background-position: center;
     background-repeat: no-repeat;
-    border: 1px solid #6e373b75;
+    border: 2px solid #6e373b75;
     /* Mantiene el borde del mismo color que el fondo */
     transform: none;
     /* Se desactiva cualquier transformación */
@@ -172,14 +213,17 @@ h1 {
 
 /* Popup container - hidden by default */
 .popup {
-    display: none; /* Oculto por defecto */
+    display: none;
+    /* Oculto por defecto */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    z-index: 1000; /* Para asegurarse de que el popup esté encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo semitransparente */
+    z-index: 1000;
+    /* Para asegurarse de que el popup esté encima de otros elementos */
     align-items: center;
     justify-content: center;
 }
@@ -220,42 +264,53 @@ h1 {
 /* Media Query para pantallas más pequeñas */
 @media (max-width: 768px) {
     /* Ajustes para dispositivos móviles */
-    
+
     /* Título */
     h1 {
-        font-size: 1.5em; /* Reducir aún más el título */
+        font-size: 1.5em;
+        /* Reducir aún más el título */
     }
 
     /* Contadores y botón de reinicio */
-    #mines-counter, #timer {
-        font-size: 1.2em; /* Reducir tamaño de los contadores */
+    #mines-counter,
+    #timer {
+        font-size: 1.2em;
+        /* Reducir tamaño de los contadores */
         padding: 6px;
     }
 
     #reset-button {
-        font-size: 1.2em; /* Reducir tamaño del botón de reinicio */
+        font-size: 1.2em;
+        /* Reducir tamaño del botón de reinicio */
         padding: 6px;
     }
 
     /* Campo de entrada de semilla */
     #seed-input {
-        font-size: 1em; /* Reducir el tamaño de la fuente */
-        padding: 8px; /* Ajustar el padding */
+        font-size: 1em;
+        /* Reducir el tamaño de la fuente */
+        padding: 8px;
+        /* Ajustar el padding */
     }
 
     /* Tablero de juego */
     #game {
-        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); /* Ajustar la cantidad de columnas según el ancho de la pantalla */
-        padding: 5px; /* Reducir el padding del tablero */
+        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+        /* Ajustar la cantidad de columnas según el ancho de la pantalla */
+        padding: 5px;
+        /* Reducir el padding del tablero */
     }
 
     /* Celdas del tablero */
     .cell {
-        width: 8vw; /* Celdas más pequeñas en pantallas pequeñas */
+        width: 8vw;
+        /* Celdas más pequeñas en pantallas pequeñas */
         height: 8vw;
-        max-width: 40px; /* Tamaño máximo para pantallas pequeñas */
+        max-width: 40px;
+        /* Tamaño máximo para pantallas pequeñas */
         max-height: 40px;
-        font-size: 1.2em; /* Reducir el tamaño de la fuente */
+        font-size: 1.2em;
+        /* Reducir el tamaño de la fuente */
     }
 }
 

@@ -259,19 +259,41 @@ function flagCell(event) {
 }
 
 function revealAllMines() {
+
+    showSadFace(); // Cambia el emoji cuando todas las minas estén reveladas
+    let minesToReveal = [];
+
+    // Recolecta todas las minas en una lista
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (gameBoard[i][j].mine) {
-                if (gameBoard[i][j].flagged) {
-                    gameBoard[i][j].flagged = !gameBoard[i][j].flagged;
-                    gameBoard[i][j].element.classList.toggle('flagged');
-                }
-                gameBoard[i][j].element.classList.add('revealed');
-                gameBoard[i][j].element.classList.add('mine');
+                minesToReveal.push(gameBoard[i][j]);
             }
         }
     }
-    showSadFace();
+
+    function revealNextMine(index) {
+        if (index >= minesToReveal.length) {
+            return;
+        }
+        let cell = minesToReveal[index];
+        if (cell.flagged) {
+            cell.flagged = !cell.flagged;
+            cell.element.classList.toggle('flagged');
+        }
+
+        if (!cell.revealed) {
+            cell.element.classList.add( 'mine', 'exploding'); // Añadir la clase 'exploding'
+        }
+        setTimeout(() => {
+            cell.element.classList.remove('exploding'); // Remover la clase después de la animación
+            revealNextMine(index + 1);
+        }, 50); // Duración de la animación, ajustable
+
+    }
+    // Inicia la revelación secuencial
+    revealNextMine(0);
+
 }
 
 // Función para cambiar el emoji cuando el jugador pierde
