@@ -51,8 +51,12 @@ function resetGame() {
 
 // Función para crear el tablero de juego
 function createBoard() {
-    gameElement.style.gridTemplateRows = `repeat(${rows}, 40px)`;
-    gameElement.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
+    // gameElement.style.gridTemplateRows = `repeat(${rows}, 40px)`;
+    // gameElement.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
+
+
+    // Limpiar cualquier contenido existente
+    gameElement.innerHTML = '';
 
     for (let i = 0; i < rows; i++) {
         gameBoard[i] = [];
@@ -73,7 +77,14 @@ function createBoard() {
             };
         }
     }
-
+    const firstCell = document.querySelector('.cell');
+    const cellWidth = firstCell.offsetWidth; // Obtiene el ancho de la celda en píxeles
+    const cellHeight = firstCell.offsetHeight; // Obtiene la altura de la celda en píxeles
+    // const cellSize = Math.min(containerWidth / cols, containerHeight / rows);
+    console.log(`El tamaño de la celda es: ${cellWidth}px x ${cellHeight}px`);
+    // Ajustar las filas y columnas del grid con el tamaño calculado
+    gameElement.style.gridTemplateRows = `repeat(${rows}, ${cellWidth}px)`;
+    gameElement.style.gridTemplateColumns = `repeat(${cols}, ${cellHeight}px)`;
     plantMines();
     calculateAdjacentMines();
 }

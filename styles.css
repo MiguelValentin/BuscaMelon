@@ -13,6 +13,7 @@ body {
     /* Imagen de fondo en patrón */
     background-repeat: repeat;
     /* Repetir la imagen en el fondo */
+    
 }
 
 h1 {
@@ -32,6 +33,7 @@ h1 {
     justify-content: space-between;
     width: 250px;
     margin-bottom: 20px;
+    max-width: 300px; /* Limitar el ancho máximo del encabezado */
 }
 
 #seed-label {
@@ -115,8 +117,10 @@ h1 {
 }
 
 .cell {
-    width: 40px;
-    height: 40px;
+    width: 10vw; /* Las celdas se ajustan en base al ancho de la pantalla */
+    height: 10vw; /* Mantiene una proporción cuadrada */
+    max-width: 40px; /* Tamaño máximo para pantallas grandes */
+    max-height: 40px; /* Tamaño máximo para pantallas grandes */
     background-color: #bdc3c7;
     border: 2px solid #7f8c8d;
     text-align: center;
@@ -163,4 +167,47 @@ h1 {
 
 .cell:active {
     transform: scale(0.95);
+}
+
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    /* Ajustes para dispositivos móviles */
+    
+    /* Título */
+    h1 {
+        font-size: 1.5em; /* Reducir aún más el título */
+    }
+
+    /* Contadores y botón de reinicio */
+    #mines-counter, #timer {
+        font-size: 1.2em; /* Reducir tamaño de los contadores */
+        padding: 6px;
+    }
+
+    #reset-button {
+        font-size: 1.2em; /* Reducir tamaño del botón de reinicio */
+        padding: 6px;
+    }
+
+    /* Campo de entrada de semilla */
+    #seed-input {
+        font-size: 1em; /* Reducir el tamaño de la fuente */
+        padding: 8px; /* Ajustar el padding */
+    }
+
+    /* Tablero de juego */
+    #game {
+        grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); /* Ajustar la cantidad de columnas según el ancho de la pantalla */
+        padding: 5px; /* Reducir el padding del tablero */
+    }
+
+    /* Celdas del tablero */
+    .cell {
+        width: 8vw; /* Celdas más pequeñas en pantallas pequeñas */
+        height: 8vw;
+        max-width: 40px; /* Tamaño máximo para pantallas pequeñas */
+        max-height: 40px;
+        font-size: 1.2em; /* Reducir el tamaño de la fuente */
+    }
 }
