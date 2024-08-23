@@ -8,6 +8,7 @@ let soundFlag = new Audio('sounds/flag.mp3');
 let soundWin = new Audio('sounds/win.mp3');
 let soundStart = new Audio('sounds/start.mp3');
 let soundCell = new Audio('sounds/cell.mp3');
+let soundWaa = new Audio('sounds/Waa.mp3');
 // -------------
 
 let gameBoard = [];
@@ -34,6 +35,7 @@ soundWin.load();
 soundFlag.load();
 soundCell.load();
 soundStart.load();
+soundWaa.load();
 
 // Función para inicializar el juego
 function initializeGame() {
@@ -223,7 +225,6 @@ function revealCell(event) {
         startTime = new Date();
         timer = setInterval(updateTimer, 1000);
     }
-
     let row = event.target.getAttribute('data-row');
     let col = event.target.getAttribute('data-col');
     let cell = gameBoard[row][col];
@@ -357,7 +358,9 @@ function revealAllMines() {
 
     showSadFace(); // Cambia el emoji cuando todas las minas estén reveladas
     let minesToReveal = [];
-
+    soundWaa.currentTime = 0;
+    soundWaa.volume = 0.3;
+    soundWaa.play();
     // Recolecta todas las minas en una lista
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
@@ -379,6 +382,7 @@ function revealAllMines() {
         }
 
         soundExplosion.currentTime = 0;
+        soundExplosion.volume = 0.5;
         soundExplosion.play();
         if (!cell.revealed) {
             cell.element.classList.add('mine', 'exploding'); // Añadir la clase 'exploding'
