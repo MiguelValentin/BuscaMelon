@@ -1,29 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+/* Dark-mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        background-image: url('background-pattern-black.png');
+        /* Imagen de fondo en patrón */
+        background-repeat: repeat;
+        /* Repetir la imagen en el fondo */
 
-body {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    background-image: url('background-pattern.png');
-    /* Imagen de fondo en patrón */
-    background-repeat: repeat;
-    /* Repetir la imagen en el fondo */
+    }
+}
 
+@media (prefers-color-scheme: light) {
+    body {
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        background-image: url('background-pattern.png');
+        /* Imagen de fondo en patrón */
+        background-repeat: repeat;
+        /* Repetir la imagen en el fondo */
+
+    }
 }
 
 h1 {
     font-size: 3em;
     color: #333;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px #fcfcfc;
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
 }
 
 
