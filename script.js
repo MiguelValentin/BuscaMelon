@@ -1,6 +1,15 @@
 const rows = 10;
 const cols = 10;
 const minesCount = 15;
+
+// ---sonidos ----------
+let soundExplosion = new Audio('sounds/explosion.mp3');
+let soundFlag = new Audio('sounds/flag.mp3');
+let soundWin = new Audio('sounds/win.mp3');
+let soundStart = new Audio('sounds/start.mp3');
+let soundCell = new Audio('sounds/cell.mp3');
+// -------------
+
 let gameBoard = [];
 let gameElement = document.getElementById('game');
 let minesCounterElement = document.getElementById('mines-counter');
@@ -18,13 +27,21 @@ let flagPlaced = false;
 
 var isPlaying = false;
 var isTime = true;
+
+// Precargar los sonidos 
+soundExplosion.load();
+soundWin.load();
+soundFlag.load();
+soundCell.load();
+soundStart.load();
+
 // Función para inicializar el juego
 function initializeGame() {
 
     seed = seedInput.value;
 
     resetButton.addEventListener('click', resetGame);
-    seedInput.addEventListener('input', resetGame);
+    seedInput.addEventListener('input', changeInputSeed);
     resetGame();
 }
 
@@ -37,8 +54,17 @@ function setSeed() {
 
 }
 
+function changeInputSeed()
+{
+    resetGame(false);
+}
+
 // Función para reiniciar el juego
-function resetGame() {
+function resetGame(sound = true) {
+    if (sound) {
+        soundStart.currentTime = 0;
+        soundStart.play();
+    }
     setSeed();
     isTime = true;
     isPlaying = false;
@@ -197,6 +223,7 @@ function revealCell(event) {
         startTime = new Date();
         timer = setInterval(updateTimer, 1000);
     }
+
     let row = event.target.getAttribute('data-row');
     let col = event.target.getAttribute('data-col');
     let cell = gameBoard[row][col];
@@ -210,6 +237,8 @@ function revealCell(event) {
             isPlaying = true;
             // setTimeout(resetGame, 2000);
         } else {
+            soundCell.currentTime = 0;
+            soundCell.play();
             resetButton.textContent = '😊';
             cell.element.textContent = cell.adjacentMines > 0 ? cell.adjacentMines : '';
             if (cell.adjacentMines === 0) {
@@ -237,6 +266,8 @@ function checkingMines() {
 }
 
 function showWinPopup() {
+    soundWin.currentTime = 0;
+    soundWin.play();
     const winPopup = document.getElementById('win-popup');
     winPopup.style.display = 'flex'; // Mostrar el popup
 
@@ -309,6 +340,8 @@ function flagCell(event) {
     if (!cell.revealed) {
         cell.flagged = !cell.flagged;
         cell.element.classList.toggle('flagged');
+        soundFlag.currentTime = 0;
+        soundFlag.play();
         if (cell.flagged) {
             minesRemaining--;
         } else {
@@ -329,6 +362,7 @@ function revealAllMines() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (gameBoard[i][j].mine) {
+
                 minesToReveal.push(gameBoard[i][j]);
             }
         }
@@ -344,6 +378,8 @@ function revealAllMines() {
             cell.element.classList.toggle('flagged');
         }
 
+        soundExplosion.currentTime = 0;
+        soundExplosion.play();
         if (!cell.revealed) {
             cell.element.classList.add('mine', 'exploding'); // Añadir la clase 'exploding'
         }
