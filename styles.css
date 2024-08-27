@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
 /* Dark-mode */
 
 body {
@@ -9,9 +10,9 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #e3e6ec;
     user-select: none;
-    background-image: url('background-pattern.png');
+    background-image: url('background-pattern2.png');
     /* Imagen de fondo en patrón */
     background-repeat: repeat;
     /* Repetir la imagen en el fondo */
@@ -30,20 +31,20 @@ body {
     /* Cambia el cursor a la flecha normal */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     body {
         background-image: url('background-pattern-black.png');
     }
-}
+} */
 
 h1 {
     font-size: 3em;
-    color: #333;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px #fcfcfc;
-    background-color: #ffffff;
+    color: #505050;
+    margin-bottom: 20px;
+    background-color: #ECF0F3;
     border-radius: 10px;
     padding: 10px;
+    box-shadow: 5px 5px 5px #d1d9e6, -5px -5px 10px #ffffff;
 }
 
 
@@ -57,39 +58,39 @@ h1 {
     /* Limitar el ancho máximo del encabezado */
 }
 
+
 #seed-label {
     width: 150px;
     padding: 10px;
     font-size: 1.2em;
-    /* border: 2px solid #7f8c8d; */
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #ECF0F3;
     color: #7a7a7a;
     text-align: center;
-    box-shadow: inset 0 0 5px rgba(139, 139, 139, 0.1);
+    box-shadow: 2px 2px 4px #d1d9e6, -2px -2px 7px #ffffff;
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 20px;
-
 }
+
+
 
 #seed-input {
     width: 150px;
     padding: 10px;
     font-size: 1.2em;
-    border: 2px solid #7f8c8d;
+    border: 2px solid #bac3e2;
+    color: #442792;
     border-radius: 10px;
     background-color: #ecf0f1;
-    color: #333;
     text-align: center;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 20px;
-    /* Espacio debajo del input */
 }
 
 #seed-input:focus {
-    border-color: #27ae60;
-    box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+    border-color: #20c766;
+    box-shadow: 0 0 10px rgba(0, 168, 70, 0.5);
     outline: none;
 }
 
@@ -101,69 +102,68 @@ h1 {
 #mines-counter,
 #timer {
     font-size: 2em;
-    background-color: #333;
-    color: #e74c3c;
+    background-color: #ecf0f1;
+    color: #442792;
     padding: 5px;
     border-radius: 10px;
-    box-shadow: inset 0 0 5px #000, 0 0 10px rgba(0, 0, 0, 0.5);
+    /* box-shadow: inset 0 0 5px #000, 0 0 10px rgba(0, 0, 0, 0.5); */
+    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
     width: 80px;
     text-align: center;
 }
 
 #reset-button {
     font-size: 2em;
-    background-color: #27ae60;
+    background-color: #1fbd60;
     color: #fff;
     border: none;
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
-    box-shadow: 0 5px #16a085;
+    text-shadow: 0 0 7px #009959; 
+    /* box-shadow: 0 5px #16a085; */
+    box-shadow: 3px 3px 4px #1bad69b4, -4px -4px 2px #b1eccd, inset 1px 1px 4px #44d4b8, inset -2px -2px 3px #009959;
     transition: transform 0.2s;
 }
 
 #reset-button:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px #16a085;
+    transform: translateY(1px);
+    /* box-shadow: 0 2px #16a085; */
+    box-shadow: inset 4px 4px 7px #0bad6a, inset -4px -4px 7px #0de773;
+
 }
 
 #game {
     display: grid;
-    grid-gap: 2px;
-    border: 3px solid #333;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #ecf0f1;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    grid-gap: 7px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #ECF0F3;
+    /* box-shadow: 10px 10px 20px #BABECC, -10px -10px 20px #FFFFFF; */
 }
 
 .cell {
     width: 10vw;
-    /* Las celdas se ajustan en base al ancho de la pantalla */
     height: 10vw;
-    /* Mantiene una proporción cuadrada */
     max-width: 40px;
-    /* Tamaño máximo para pantallas grandes */
     max-height: 40px;
-    /* Tamaño máximo para pantallas grandes */
-    background-color: #bdc3c7;
-    border: 2px solid #7f8c8d;
+    background-color: #ECF0F3;
+    border-radius: 7px;
     text-align: center;
     line-height: 38px;
     font-size: 1.5em;
     cursor: pointer;
-    border-radius: 5px;
+    box-shadow: 4px 4px 4px #d1d9e6, -4px -4px 4px #ffffff, inset -2px -2px 2px #bac3e2;
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .cell:hover {
-    background-color: #95a5a6;
+    background-color: #dde8ff;
 }
 
 .cell.revealed {
-    background-color: #ecf0f1;
-    border-color: #bdc3c7;
-    box-shadow: inset 0 0 5px #7f8c8d;
+    background-color: #e6e9ef;
+    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
     animation: revealAnimation 0.15s ease-in-out;
 }
 
@@ -205,28 +205,48 @@ h1 {
 } */
 
 .cell.mine {
-    background-color: #e74d3cce;
-    color: black;
+    background-color: #f15e4d;
+    /* color: black; */
     background-image: url('mine.png');
     background-size: contain;
     /* background-size: 28px 28px; */
     background-position: center;
     background-repeat: no-repeat;
-    border: 2px solid #6e373b75;
+    /* border: 2px solid #6e373b75; */
     /* Mantiene el borde del mismo color que el fondo */
     transform: none;
     /* Se desactiva cualquier transformación */
     box-shadow: none;
     /* Se elimina cualquier sombra */
+    box-shadow: 4px 4px 4px #dd8888, -4px -4px 4px #ffffff, inset 1px 1px 4px #ff9696, inset -2px -2px 3px #ff0000;
+
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
 
+/* .cell {
+    width: 10vw;
+    height: 10vw;
+    max-width: 40px;
+    max-height: 40px;
+    background-color: #ECF0F3;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 38px;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 4px 4px 4px #d1d9e6, -4px -4px 4px #ffffff;
+
+    transition: background-color 0.2s, box-shadow 0.2s;
+} */
+
 .cell.flagged {
-    background-color: #f39c12;
-    border-color: #e67e22;
+    background-color: #ffbe57;
+    text-shadow: 0 0 5px #e07800; 
+    box-shadow: 3px 3px 7px #e4b469, -4px -4px 4px #ffffff, inset 1px 1px 4px #ffd596, inset -2px -2px 3px #ff7b00;
 }
 
 .cell.flagged:before {
-    content: '🚩';
+    content: '🍄';
 }
 
 .cell:active {
