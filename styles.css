@@ -1,38 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 /* Dark-mode */
-@media (prefers-color-scheme: dark) {
-    body {
-        font-family: 'Poppins', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-        background-image: url('background-pattern-black.png');
-        /* Imagen de fondo en patrón */
-        background-repeat: repeat;
-        /* Repetir la imagen en el fondo */
 
-    }
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    user-select: none;
+    background-image: url('background-pattern.png');
+    /* Imagen de fondo en patrón */
+    background-repeat: repeat;
+    /* Repetir la imagen en el fondo */
+
+    /* Previene la selección de texto en navegadores modernos */
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
 }
 
-@media (prefers-color-scheme: light) {
-    body {
-        font-family: 'Poppins', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-        background-image: url('background-pattern.png');
-        /* Imagen de fondo en patrón */
-        background-repeat: repeat;
-        /* Repetir la imagen en el fondo */
+* {
+    cursor: default;
+    /* Cambia el cursor a la flecha normal */
+}
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background-image: url('background-pattern-black.png');
     }
 }
 
@@ -180,27 +180,29 @@ h1 {
 
 @keyframes explosion {
     0% {
-        transform: scale(0.25);
-        opacity: 1;
-        background-color: rgb(255, 255, 255);
+        transform: scale(0.3);
+        opacity: 0.5;
     }
 
     50% {
-        transform: scale(1.3);
-        opacity: 0.8;
-        background-color: rgb(255, 0, 0);
+        transform: scale(1.2);
+        opacity: 1;
     }
 
     100% {
         transform: scale(1);
-        opacity: 0;
-        background-color: #ffffffce;
+        opacity: 1;
     }
+
 }
 
 .mine.exploding {
-    animation: explosion 0.25s ease-out;
+    animation: explosion 0.2s ease-out;
 }
+
+/* .cell.mine.exploding{
+    background-color: #000000ce;
+} */
 
 .cell.mine {
     background-color: #e74d3cce;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
@@ -8,6 +9,7 @@
     <title>BuscaMelon</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <h1>BuscaMelon</h1>
     <div class="header">
@@ -17,17 +19,25 @@
     </div>
     <div>
         <label id="seed-label" for="seed-input">Semilla:</label>
-        <input type="text" id="seed-input" placeholder="12345">
+        <input type="text" id="seed-input" placeholder="*****">
     </div>
- 
+
     <div id="game"></div>
-    <script src="script.js"></script>
     <div id="win-popup" class="popup">
         <div class="popup-content">
             <h2>¡Ganaste!</h2>
             <button id="close-popup">Cerrar</button>
         </div>
     </div>
-    
+    <!-- Enlace a los archivos JS -->
+    <script src="controller.js"></script>
+    <script src="action-ui.js"></script>
+    <script src="sounds.js"></script>
+    <script src="animation.js"></script>
+    <script src="board.js"></script>
+    <script src="util.js"></script>
+    <script src="main.js"></script>
+
 </body>
+
 </html>
