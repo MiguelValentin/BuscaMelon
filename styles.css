@@ -1,6 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-/* Dark-mode */
+:root[data-theme="light"] {
+    --background-color: #e3e6ec;
+    --base-color: #ECF0F3;
+    --shadow-color: #bac3e2;
+    --shadowcell-color: #d1d9e6;
+    --revealcell-color: #e6e9ef;
+    --glow-color: #ffffff;
+    --light-text-color: #b5a7d9;
+    --text-color: #442792;
+}
+
+:root[data-theme="dark"] {
+    --background-color: #26282e;
+    --base-color: #2a2d32;
+    --shadow-color: #17191f;
+    --shadowcell-color: #21232b;
+    --revealcell-color: #24262b;
+    --glow-color: #353a42;
+    --light-text-color: #5c536e;
+    --text-color: #8d59ff;
+
+}
+
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -10,7 +32,9 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background-color: #e3e6ec;
+    background-color: var(--background-color);
+    /* background-image: linear-gradient(to bottom right, var(--light-glow-color), var(--light-base-color)); */
+    /* background-image: url('background-pattern2.png'), linear-gradient(to bottom right, var(--light-glow-color), var(--light-base-color)); */
     user-select: none;
     background-image: url('background-pattern2.png');
     /* Imagen de fondo en patrón */
@@ -39,12 +63,12 @@ body {
 
 h1 {
     font-size: 3em;
-    color: #505050;
+    color: var(--text-color);
     margin-bottom: 20px;
-    background-color: #ECF0F3;
+    background-color: var(--base-color);
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 5px 5px 5px #d1d9e6, -5px -5px 10px #ffffff;
+    box-shadow: 5px 5px 5px var(--shadow-color), -5px -5px 10px var(--glow-color);
 }
 
 
@@ -64,10 +88,10 @@ h1 {
     padding: 10px;
     font-size: 1.2em;
     border-radius: 10px;
-    background-color: #ECF0F3;
-    color: #7a7a7a;
+    background-color: var(--base-color);
+    color: var(--light-text-color);
     text-align: center;
-    box-shadow: 2px 2px 4px #d1d9e6, -2px -2px 7px #ffffff;
+    box-shadow: 2px 2px 4px var(--shadow-color), -2px -2px 7px var(--glow-color);
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 20px;
 }
@@ -78,36 +102,36 @@ h1 {
     width: 150px;
     padding: 10px;
     font-size: 1.2em;
-    border: 2px solid #bac3e2;
-    color: #442792;
+    border: 2px solid var(--revealcell-color);
+    color: var(--text-color);
     border-radius: 10px;
-    background-color: #ecf0f1;
+    background-color: var(--base-color);
     text-align: center;
-    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
+    box-shadow: inset 2px 2px 5px var(--shadow-color), inset -2px -2px 5px var(--glow-color);
     transition: border-color 0.2s, box-shadow 0.2s;
     margin-bottom: 20px;
 }
 
 #seed-input:focus {
     border-color: #20c766;
-    box-shadow: 0 0 10px rgba(0, 168, 70, 0.5);
+    box-shadow: 0 0 10px rgba(0, 168, 70, 0.5), inset 4px 4px 7px var(--shadow-color), inset -4px -4px 7px var(--glow-color);
     outline: none;
 }
 
 #seed-input::placeholder {
-    color: #95a5a6;
+    color: var(--light-text-color);
     font-style: italic;
 }
 
 #mines-counter,
 #timer {
     font-size: 2em;
-    background-color: #ecf0f1;
-    color: #442792;
+    background-color: var(--base-color);
+    color: var(--text-color);
     padding: 5px;
     border-radius: 10px;
     /* box-shadow: inset 0 0 5px #000, 0 0 10px rgba(0, 0, 0, 0.5); */
-    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
+    box-shadow: inset 4px 4px 7px var(--shadow-color), inset -4px -4px 7px var(--glow-color);
     width: 80px;
     text-align: center;
 }
@@ -120,9 +144,8 @@ h1 {
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
-    text-shadow: 0 0 7px #009959; 
-    /* box-shadow: 0 5px #16a085; */
-    box-shadow: 3px 3px 4px #1bad69b4, -4px -4px 2px #b1eccd, inset 1px 1px 4px #44d4b8, inset -2px -2px 3px #009959;
+    text-shadow: 0 0 7px #009959;
+    box-shadow: 3px 3px 4px #00cf6e91, -3px -3px 5px #00ff4c42, inset 1px 1px 4px #00ffcca4, inset -2px -2px 3px #009959;
     transition: transform 0.2s;
 }
 
@@ -133,12 +156,34 @@ h1 {
 
 }
 
+#theme-toggle {
+    width: 50px;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 0px solid var(--shadow-color);
+    background-color: var(--base-color);
+    color: var(--light-text-color);
+    text-align: center;
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
+    /* transition: border-color 0.2s, box-shadow 0.2s; */
+    margin-bottom: 20px;
+    margin-right: 10px;
+    /* transition: transform 0.2s; */
+}
+
+#theme-toggle:active {
+    transform: translateY(1px);
+    box-shadow: 0 0px #ffffff00;
+
+}
+
 #game {
     display: grid;
     grid-gap: 7px;
     border-radius: 20px;
     padding: 20px;
-    background-color: #ECF0F3;
+    background-color: var(--base-color);
     /* box-shadow: 10px 10px 20px #BABECC, -10px -10px 20px #FFFFFF; */
 }
 
@@ -147,23 +192,25 @@ h1 {
     height: 10vw;
     max-width: 40px;
     max-height: 40px;
-    background-color: #ECF0F3;
+    color: var(--text-color);
+    background-color: var(--base-color);
+    /* background-image: linear-gradient(to bottom right, #fff, #fff); */
     border-radius: 7px;
     text-align: center;
     line-height: 38px;
     font-size: 1.5em;
     cursor: pointer;
-    box-shadow: 4px 4px 4px #d1d9e6, -4px -4px 4px #ffffff, inset -2px -2px 2px #bac3e2;
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
 .cell:hover {
-    background-color: #dde8ff;
+    background-color: var(--shadowcell-color);
 }
 
 .cell.revealed {
-    background-color: #e6e9ef;
-    box-shadow: inset 4px 4px 7px #bac3e2, inset -4px -4px 7px #FFF;
+    background-color: var(--revealcell-color);
+    box-shadow: inset 4px 4px 7px var(--shadow-color), inset -4px -4px 7px var(--glow-color);
     animation: revealAnimation 0.15s ease-in-out;
 }
 
@@ -205,9 +252,10 @@ h1 {
 } */
 
 .cell.mine {
-    background-color: #f15e4d;
+    /* background-color: #f15e4d; */
     /* color: black; */
-    background-image: url('mine.png');
+    /* background-image: url('mine.png'); */
+    background-image: url('mine.png'), linear-gradient(to bottom right, #ff6a14, #f42836, #cc0032);
     background-size: contain;
     /* background-size: 28px 28px; */
     background-position: center;
@@ -218,31 +266,22 @@ h1 {
     /* Se desactiva cualquier transformación */
     box-shadow: none;
     /* Se elimina cualquier sombra */
-    box-shadow: 4px 4px 4px #dd8888, -4px -4px 4px #ffffff, inset 1px 1px 4px #ff9696, inset -2px -2px 3px #ff0000;
-
+    /* background-image: linear-gradient(to bottom right, #ff8323, #ec2c2c); */
+    /* box-shadow:  inset 1px 1px 3px #ff9900bd, inset -2px -2px 3px #ff0000; */
+    /* box-shadow: 4px 4px 4px var(--light-shadowcell-color), -4px -4px 4px var(--light-glow-color), inset 1px 1px 3px #ff9900bd, inset -2px -2px 3px #ff0000; */
+    box-shadow: 3px 2px 5px #ff0000b5, -1px -1px 2px #ffcd0066, inset 1px 1px 5px #ffb100, inset -3px -3px 5px #aa00528a;
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-/* .cell {
-    width: 10vw;
-    height: 10vw;
-    max-width: 40px;
-    max-height: 40px;
-    background-color: #ECF0F3;
-    border-radius: 7px;
-    text-align: center;
-    line-height: 38px;
-    font-size: 1.5em;
-    cursor: pointer;
-    box-shadow: 4px 4px 4px #d1d9e6, -4px -4px 4px #ffffff;
-
-    transition: background-color 0.2s, box-shadow 0.2s;
-} */
-
 .cell.flagged {
-    background-color: #ffbe57;
-    text-shadow: 0 0 5px #e07800; 
-    box-shadow: 3px 3px 7px #e4b469, -4px -4px 4px #ffffff, inset 1px 1px 4px #ffd596, inset -2px -2px 3px #ff7b00;
+    /* background-color: #ffbe57; */
+    text-shadow: 0 0 5px #e07800;
+    /* background-image: linear-gradient(to bottom right, #ff8323, #ec2c2c); */
+    background-image: linear-gradient(to bottom right, #fde50e, #f08446);
+    /* box-shadow: 3px 3px 7px #e4b469, -4px -4px 4px var(--light-glow-color), inset 1px 1px 4px #ffd596, inset -2px -2px 3px #ff7b00; */
+    /* box-shadow: 3px 3px 4px #ff9d0096, -2px -2px 4px #ffae008c, inset 1px 1px 4px #fff348, inset -2px -2px 3px #ff7b00; */
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -4px -4px 4px var(--glow-color), inset 2px 2px 3px #fff348, inset -2px -2px 2px #ff4800;
+    /* box-shadow: inset 2px 2px 3px #fff348, inset -2px -2px 2px #ff4800; */
 }
 
 .cell.flagged:before {

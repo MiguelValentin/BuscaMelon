@@ -1,6 +1,7 @@
 
 let resetButton = document.getElementById('reset-button');
 let seedInput = document.getElementById('seed-input');
+const themeToggleBtn = document.getElementById('theme-toggle');
 
 let flagTimeout;
 let flagPlaced = false;
@@ -13,9 +14,30 @@ function setActionsUI() {
     document.oncontextmenu = disableContextmenu // deshabilita el menú contextual
     resetButton.addEventListener('mousedown', resetGameButton);
     seedInput.addEventListener('input', updateSeedInput);
+    themeToggleBtn.addEventListener('click', toggleTheme);
 }
 
+// Función para cambiar el tema
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggleBtn.textContent = '🌙';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggleBtn.textContent = '☀️';
+    }
+}
 
+function initializeTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggleBtn.textContent = '☀️';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggleBtn.textContent = '🌙';
+    }
+}
 
 function addCellEvents(element) {
     if (isMobile) {
