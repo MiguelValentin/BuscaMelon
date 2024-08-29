@@ -15,13 +15,15 @@ function formatNumber(number) {
 }
 
 function generateRandomSeed() {
+    if (isSeedLocked) return;
     const randonNumber = Math.floor(Math.random() * 89999 + 10000);
     seed = randonNumber;
     console.log(seed);
 }
 
 function initValues() {
-    isInitialized = false;
+    if (!isSeedLocked)
+        isInitialized = false;
     counterStarted = false;
     isGameOver = false;
     gameBoard = [];

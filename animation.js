@@ -40,6 +40,23 @@ function setSeedInputText(row, col) {
     seedInput.value = seed + '' + row + col;
 }
 
+function updateFocusInputText(state) {
+    if (state)
+        seedInput.setAttribute('data-focused', 'true');
+    else
+        seedInput.removeAttribute('data-focused');
+}
+
+function animToglePadLockButton() {
+    if (isSeedLocked) {
+        padlockToggleBtn.setAttribute('data-focused', 'true')
+        padlockToggleBtn.textContent = '🔒';
+    } else {
+        padlockToggleBtn.removeAttribute('data-focused')
+        padlockToggleBtn.textContent = '🔓';
+    }
+}
+
 function revealMineHints() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {

@@ -1,7 +1,9 @@
 
-let resetButton = document.getElementById('reset-button');
-let seedInput = document.getElementById('seed-input');
+const resetButton = document.getElementById('reset-button');
+const seedInput = document.getElementById('seed-input');
 const themeToggleBtn = document.getElementById('theme-toggle');
+const padlockToggleBtn = document.getElementById('padlock-toggle');
+
 
 let flagTimeout;
 let flagPlaced = false;
@@ -15,6 +17,7 @@ function setActionsUI() {
     resetButton.addEventListener('mousedown', resetGameButton);
     seedInput.addEventListener('input', updateSeedInput);
     themeToggleBtn.addEventListener('click', toggleTheme);
+    padlockToggleBtn.addEventListener('click', clickToglePadlock);
 }
 
 // Función para cambiar el tema
@@ -37,6 +40,13 @@ function initializeTheme() {
         document.documentElement.setAttribute('data-theme', 'light');
         themeToggleBtn.textContent = '🌙';
     }
+}
+
+
+function clickToglePadlock() {
+    updateSeedLock(!isSeedLocked);
+    if (!isSeedLocked)
+        resetGameButton();
 }
 
 function addCellEvents(element) {
@@ -63,6 +73,14 @@ function updateSeedInput() {
     setGame();
     initializeBoard(offsetSeed[0], offsetSeed[1]);
     isInitialized = true;
+    updateSeedLock(true);
+}
+
+function updateSeedLock(state) {
+    // if(!isInitialized) isInitialized = true;
+    updateFocusInputText(state);
+    isSeedLocked = state;
+    animToglePadLockButton();
 }
 
 function fixedInput() {

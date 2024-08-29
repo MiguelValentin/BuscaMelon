@@ -23,9 +23,17 @@ function initializeGame() {
 
 // Función para reiniciar el juego
 function resetGame() {
-    generateRandomSeed();
-    clearSeedInputText();
-    setGame();
+    if (!isSeedLocked) {
+        generateRandomSeed();
+        clearSeedInputText();
+    }
+    if (isSeedLocked) {
+        if (seedInput.value == '')
+            generateRandomSeed();
+        updateSeedInput();
+    }
+    else
+        setGame();
 }
 
 function setGame() {

@@ -3,7 +3,7 @@
 :root[data-theme="light"] {
     --background-color: #e3e6ec;
     --base-color: #ECF0F3;
-    --shadow-color: #bac3e2;
+    --shadow-color: #aeb9e1;
     --shadowcell-color: #d1d9e6;
     --revealcell-color: #e6e9ef;
     --glow-color: #ffffff;
@@ -82,6 +82,28 @@ h1 {
     /* Limitar el ancho máximo del encabezado */
 }
 
+#theme-toggle {
+    width: 50px;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 0px solid var(--shadow-color);
+    background-color: var(--base-color);
+    color: var(--light-text-color);
+    text-align: center;
+    text-shadow: 3px 3px 6px var(--shadow-color);
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
+    /* transition: border-color 0.2s, box-shadow 0.2s; */
+    margin-bottom: 20px;
+    margin-right: 10px;
+    /* transition: transform 0.2s; */
+}
+
+#theme-toggle:active {
+    transform: translateY(1px);
+    box-shadow: 0 0px #ffffff00;
+
+}
 
 #seed-label {
     width: 150px;
@@ -112,7 +134,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-#seed-input:focus {
+#seed-input:focus,
+#seed-input[data-focused="true"] {
     border-color: #20c766;
     box-shadow: 0 0 10px rgba(0, 168, 70, 0.5), inset 4px 4px 7px var(--shadow-color), inset -4px -4px 7px var(--glow-color);
     outline: none;
@@ -121,6 +144,30 @@ h1 {
 #seed-input::placeholder {
     color: var(--light-text-color);
     font-style: italic;
+}
+
+#padlock-toggle {
+    width: 50px;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 2px solid var(--revealcell-color);
+    background-color: var(--base-color);
+    color: var(--light-text-color);
+    text-align: center;
+    text-shadow: 3px 3px 6px var(--shadow-color);
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
+    /* transition: border-color 0.2s, box-shadow 0.2s; */
+    margin-bottom: 20px;
+    margin-right: 10px;
+    /* transition: transform 0.2s; */
+}
+
+#padlock-toggle[data-focused="true"] {
+    border-color: #20c766;
+    box-shadow: 0 0 10px rgba(0, 168, 70, 0.5);
+    outline: none;
+
 }
 
 #mines-counter,
@@ -153,28 +200,6 @@ h1 {
     transform: translateY(1px);
     /* box-shadow: 0 2px #16a085; */
     box-shadow: inset 4px 4px 7px #0bad6a, inset -4px -4px 7px #0de773;
-
-}
-
-#theme-toggle {
-    width: 50px;
-    padding: 10px;
-    font-size: 1.2em;
-    border-radius: 10px;
-    border: 0px solid var(--shadow-color);
-    background-color: var(--base-color);
-    color: var(--light-text-color);
-    text-align: center;
-    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
-    /* transition: border-color 0.2s, box-shadow 0.2s; */
-    margin-bottom: 20px;
-    margin-right: 10px;
-    /* transition: transform 0.2s; */
-}
-
-#theme-toggle:active {
-    transform: translateY(1px);
-    box-shadow: 0 0px #ffffff00;
 
 }
 

@@ -1,5 +1,6 @@
 
 let cellsToReveal = [];
+let isSeedLocked = false;
 
 let isInitialized = false;
 
