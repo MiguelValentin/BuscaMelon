@@ -121,7 +121,7 @@ h1 {
 
 
 #seed-input {
-    width: 150px;
+    width: 100px;
     padding: 10px;
     font-size: 1.2em;
     border: 2px solid var(--revealcell-color);
@@ -159,7 +159,7 @@ h1 {
     box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
     /* transition: border-color 0.2s, box-shadow 0.2s; */
     margin-bottom: 20px;
-    margin-right: 10px;
+    margin-left: 10px;
     /* transition: transform 0.2s; */
 }
 
