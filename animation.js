@@ -61,7 +61,7 @@ function revealMineHints() {
     gameBoard.forEach(
         row => row.forEach(
             cell => cell.type === typeCell.mine ?
-                (cell.element.textContent = 'M') : cell.element.textContent = '')
+                (cell.element.textContent = '') : cell.element.textContent = '')
     );
 }
 
