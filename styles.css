@@ -1,6 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 :root[data-theme="light"] {
+    .one {
+        color: #1e74fd;
+    }
+
+    .two {
+        color: #59932b;
+    }
+
+    .three {
+        color: #d00000;
+    }
+
+    .four {
+        color: #003052;
+    }
+
+    .five {
+        color: #63352d;
+    }
+
+    .six {
+        color: #891688;
+    }
+
+    .seven {
+        color: #fe8b00;
+    }
+
+    .eight {
+        color: #4d2689;
+    }
+
     --background-color: #e3e6ec;
     --base-color: #ECF0F3;
     --shadow-color: #aeb9e1;
@@ -12,6 +44,38 @@
 }
 
 :root[data-theme="dark"] {
+    .one {
+        color: #1e74fd;
+    }
+
+    .two {
+        color: #82d322;
+    }
+
+    .three {
+        color: #d00000;
+    }
+
+    .four {
+        color: #b8f4f5;
+    }
+
+    .five {
+        color: #bd6340;
+    }
+
+    .six {
+        color: #ff007f;
+    }
+
+    .seven {
+        color: #fe8b00;
+    }
+
+    .eight {
+        color: #7f00ff;
+    }
+
     --background-color: #25252d;
     --base-color: #2d2d34;
     --shadow-color: #181820;
@@ -22,6 +86,8 @@
     --text-color: #8d59ff;
 
 }
+
+
 
 /* :root[data-theme="dark"] {
     --background-color: #26282e;
@@ -250,7 +316,7 @@ h1 {
     height: 10vw;
     max-width: 40px;
     max-height: 40px;
-    color: var(--text-color);
+    /* color: var(--text-color); */
     background-color: var(--base-color);
     /* background-image: linear-gradient(to bottom right, #fff, #fff); */
     border-radius: 7px;

@@ -80,7 +80,6 @@ function createBoard() {
             cell.classList.add('cell');
             cell.setAttribute('data-row', i.toString());
             cell.setAttribute('data-col', j.toString());
-
             addCellEvents(cell);//agrega eventos de click a las celdas
 
             gameElement.appendChild(cell);
@@ -200,6 +199,7 @@ function calculateAdjacentMines() {
                 else
                     cell.type = typeCell.number;
                 cell.adjacentMines = adjacentMines;
+                addColorTextCell(cell);
             }
         }
     }
