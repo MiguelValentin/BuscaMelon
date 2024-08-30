@@ -11,54 +11,20 @@ const mineCell = "mine";
 const numberCell = "number";
 const voidCell = "void";
 
-const babuLevel = {
-    rows: 10,
-    cols: 5,
-    minesCount: 6,
-}
+const babuLevel = { rows: 10, cols: 5, minesCount: 6 };
+const knightLevel = { rows: 10, cols: 10, minesCount: 17 };
+const kingLevel = { rows: 10, cols: 30, minesCount: 60 };
 
-const knightLevel = {
-    rows: 10,
-    cols: 10,
-    minesCount: 17,
-}
+const typeCell = { mine: 'mine', number: 'number', void: 'void', null: 'null' }
 
-const kingLevel = {
-    rows: 10,
-    cols: 30,
-    minesCount: 60,
-}
-
-const typeCell = {
-    mine: 'mine',
-    number: 'number',
-    void: 'void',
-    null: 'null'
-}
-
-const stateCell = {
-    normal: 'normal',
-    revealed: 'revealed',
-    flag: 'flag'
-}
+const stateCell = { normal: 'normal', revealed: 'revealed', flag: 'flag' };
 
 let optionLevel = 1;
 
 function changeLevel() {
-    optionLevel++;
-    if (optionLevel > 2)
-        optionLevel = 0;
-    switch (optionLevel) {
-        case 0:
-            updateLevel(babuLevel);
-            break;
-        case 1:
-            updateLevel(knightLevel);
-            break;
-        case 2:
-            updateLevel(kingLevel);
-            break;
-    }
+    optionLevel = (optionLevel + 1) % 3; // Actualiza el nivel de opción en base a un ciclo de tres niveles posibles(0,1,2).
+    const levels = [babuLevel, knightLevel, kingLevel];
+    updateLevel(levels[optionLevel]);// Actualiza el nivel de juego en base al optionLevel.
 }
 
 function updateLevel(level) {
@@ -207,6 +173,13 @@ function calculateAdjacentMines() {
 
 function countAdjacentMines(row, col) {
     let count = 0;
+    // let slp;
+    // h.forEach(z => h.forEach(p => slp.push(p))) h.forEach(p => slp.push(p))
+    // let i, j;
+
+    // i = (i + 1) % 2 - 1;
+    // j = (j + 1) % 2 - 1;
+
     for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
             let newRow = row + i;

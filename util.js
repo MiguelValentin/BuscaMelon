@@ -41,7 +41,7 @@ function getCell(event) {
 
 function checkingMobileUI() {
     let nav = navigator.userAgent;
-
+    
     if (nav.match(/Android/i) || nav.match(/webOS/i) || nav.match(/iPhone/i) || nav.match(/iPad/i)) {
         isMobile = true;
     } else {

@@ -110,7 +110,7 @@ function handlePointerDown(event) {
     flagTimeout = setTimeout(() => {
         flagCell(event);  // Colocar la bandera
         flagPlaced = true;  // Marcar que la bandera ha sido colocada
-    }, 1150);  // Tiempo de espera reducido (en milisegundos)
+    }, 150);  // Tiempo de espera reducido (en milisegundos)
 }
 
 function handlePointerUp(event) {

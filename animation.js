@@ -1,8 +1,8 @@
-let idleIconAnim = '😊';
-let winIconAnim = '😆';
-let loseIconAnim = '😭';
-let flagIconAnim = '🫣';
-let revealedIconAmin = '😬';
+const idleIconAnim = '😊';
+const winIconAnim = '😆';
+const loseIconAnim = '😭';
+const flagIconAnim = '🫣';
+const revealedIconAmin = '😬';
 
 function updateEmoji(emoji) {
     resetButton.textContent = emoji;
@@ -58,15 +58,11 @@ function animToglePadLockButton() {
 }
 
 function revealMineHints() {
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            let cell = gameBoard[i][j];
-            cell.element.textContent = '';
-            if (cell.type == typeCell.mine) {
-                cell.element.textContent = '';
-            }
-        }
-    }
+    gameBoard.forEach(
+        row => row.forEach(
+            cell => cell.type === typeCell.mine ?
+                (cell.element.textContent = 'M') : cell.element.textContent = '')
+    );
 }
 
 function showWinPopup() {
@@ -115,42 +111,10 @@ function animConfetti() {
     })();
 }
 
+// grupo de clases css para los números de minas
+const MINE_CLASSES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+
 function addColorTextCell(cell) {
-    cell.element.classList.remove('one');
-    cell.element.classList.remove('two');
-    cell.element.classList.remove('three');
-    cell.element.classList.remove('four');
-    cell.element.classList.remove('five');
-    cell.element.classList.remove('six');
-    cell.element.classList.remove('seven');
-    cell.element.classList.remove('eight');
-    // cell.element.classList.remove('one' && 'two' && 'three' && 'four' && 'five');
-    switch (cell.adjacentMines) {
-        case 1:
-            cell.element.classList.add('one');
-            break;
-        case 2:
-            cell.element.classList.add('two');
-            break;
-        case 3:
-            cell.element.classList.add('three');
-            break;
-        case 4:
-            cell.element.classList.add('four');
-            break;
-        case 5:
-            cell.element.classList.add('five');
-            break;
-        case 6:
-            cell.element.classList.add('six');
-            break;
-        case 7:
-            cell.element.classList.add('seven');
-            break;
-        case 8:
-            cell.element.classList.add('eight');
-            break;
-        default:
-            break;
-    }
+    cell.element.classList.remove(...MINE_CLASSES);// Elimina todas las clases css de tipo número antes de agregar el nuevo
+    cell.element.classList.add(MINE_CLASSES[cell.adjacentMines - 1]);// Agrega la clase css para su respectivo color
 }

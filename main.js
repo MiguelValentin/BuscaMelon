@@ -16,6 +16,7 @@ var counterStarted = false;
 
 // Función para inicializar el juego
 function initializeGame() {
+    
     initializeTheme();
     setActionsUI();
     resetGame();
