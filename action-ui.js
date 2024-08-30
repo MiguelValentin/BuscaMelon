@@ -3,6 +3,7 @@ const resetButton = document.getElementById('reset-button');
 const seedInput = document.getElementById('seed-input');
 const themeToggleBtn = document.getElementById('theme-toggle');
 const padlockToggleBtn = document.getElementById('padlock-toggle');
+const levelBtn = document.getElementById('level-button');
 
 
 let flagTimeout;
@@ -18,6 +19,7 @@ function setActionsUI() {
     seedInput.addEventListener('input', updateSeedInput);
     themeToggleBtn.addEventListener('click', toggleTheme);
     padlockToggleBtn.addEventListener('click', clickToglePadlock);
+    levelBtn.addEventListener('click', clickLevelButton);
 }
 
 // Función para cambiar el tema
@@ -47,6 +49,10 @@ function clickToglePadlock() {
     updateSeedLock(!isSeedLocked);
     if (!isSeedLocked)
         resetGameButton();
+}
+
+function clickLevelButton() {
+    changeLevel();
 }
 
 function addCellEvents(element) {
@@ -104,7 +110,7 @@ function handlePointerDown(event) {
     flagTimeout = setTimeout(() => {
         flagCell(event);  // Colocar la bandera
         flagPlaced = true;  // Marcar que la bandera ha sido colocada
-    }, 150);  // Tiempo de espera reducido (en milisegundos)
+    }, 1150);  // Tiempo de espera reducido (en milisegundos)
 }
 
 function handlePointerUp(event) {

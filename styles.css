@@ -12,6 +12,18 @@
 }
 
 :root[data-theme="dark"] {
+    --background-color: #25252d;
+    --base-color: #2d2d34;
+    --shadow-color: #181820;
+    --shadowcell-color: #21212b;
+    --revealcell-color: #25252d;
+    --glow-color: #393947;
+    --light-text-color: #5c536e;
+    --text-color: #8d59ff;
+
+}
+
+/* :root[data-theme="dark"] {
     --background-color: #26282e;
     --base-color: #2a2d32;
     --shadow-color: #17191f;
@@ -19,10 +31,8 @@
     --revealcell-color: #24262b;
     --glow-color: #353a42;
     --light-text-color: #5c536e;
-    --text-color: #8d59ff;
-
-}
-
+    --text-color: #8d59ff; 
+} */
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -100,6 +110,29 @@ h1 {
 }
 
 #theme-toggle:active {
+    transform: translateY(1px);
+    box-shadow: 0 0px #ffffff00;
+
+}
+
+#level-button {
+    width: 50px;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    border: 0px solid var(--shadow-color);
+    background-color: var(--base-color);
+    color: var(--light-text-color);
+    text-align: center;
+    text-shadow: 3px 3px 6px var(--shadow-color);
+    box-shadow: 4px 4px 4px var(--shadowcell-color), -3px -3px 3px var(--glow-color), inset -2px -2px 2px var(--shadow-color);
+    /* transition: border-color 0.2s, box-shadow 0.2s; */
+    margin-bottom: 20px;
+    margin-right: 10px;
+    /* transition: transform 0.2s; */
+}
+
+#level-button:active {
     transform: translateY(1px);
     box-shadow: 0 0px #ffffff00;
 
@@ -403,7 +436,7 @@ h1 {
     #game {
         grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
         /* Ajustar la cantidad de columnas según el ancho de la pantalla */
-        padding: 5px;
+        /* padding: 5px; */
         /* Reducir el padding del tablero */
     }
 

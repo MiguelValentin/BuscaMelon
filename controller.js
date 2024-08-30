@@ -93,7 +93,7 @@ function revealAdjacentCells(row, col) {
 }
 
 function flagCell(event) {
-
+    // console.log('click');
     if (isGameOver) return;
     let cell = getCell(event);
     if (minesRemaining == 0 && cell.state != stateCell.flag)
@@ -113,12 +113,12 @@ function flagCell(event) {
     flagAnim();
     checkWinConditions();
 }
-
+let minesToReveal = [];
 function revealAllMines() {
     if (isGameOver) return;
     terminateGame();
     loseAnim();
-    let minesToReveal = [];
+    minesToReveal = [];
     gameOverPlay();
     // Recolecta todas las minas en una lista
     for (let i = 0; i < rows; i++) {

@@ -24,6 +24,7 @@ function generateRandomSeed() {
 function initValues() {
     if (!isSeedLocked)
         isInitialized = false;
+    minesToReveal = [];
     counterStarted = false;
     isGameOver = false;
     gameBoard = [];

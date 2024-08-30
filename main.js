@@ -1,5 +1,5 @@
 
-const minesCount = 17;
+
 const defaultTimer = '000';
 
 let minesCounterElement = document.getElementById('mines-counter');
