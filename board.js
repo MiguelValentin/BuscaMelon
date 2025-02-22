@@ -42,13 +42,18 @@ function createBoard() {
     for (let i = 0; i < rows; i++) {
         gameBoard[i] = [];
         for (let j = 0; j < cols; j++) {
+            let cellContainer = document.createElement('div');
+            cellContainer.classList.add('cell-container');
             let cell = document.createElement('div');
             cell.classList.add('cell');
             cell.setAttribute('data-row', i.toString());
             cell.setAttribute('data-col', j.toString());
-            addCellEvents(cell);//agrega eventos de click a las celdas
-
-            gameElement.appendChild(cell);
+            cellContainer.setAttribute('data-row', i.toString());
+            cellContainer.setAttribute('data-col', j.toString());
+            addCellEvents(cellContainer);//agrega eventos de click a las celdas contenedoras
+            cellContainer.appendChild(cell);
+            gameElement.appendChild(cellContainer);
+            // gameElement.appendChild(cell);
             gameBoard[i][j] = {
                 element: cell,
                 type: typeCell.null,

@@ -309,6 +309,16 @@ h1 {
     /* box-shadow: 10px 10px 20px #BABECC, -10px -10px 20px #FFFFFF; */
 }
 
+.cell-container {
+    /* Cada contenedor es 50x50, ocupando la celda del grid completa */
+    width: 47px;
+    height: 47px;
+    /* Centra el div interno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .cell {
     width: 10vw;
     height: 10vw;

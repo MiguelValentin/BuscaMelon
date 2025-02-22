@@ -9,6 +9,11 @@ function checkCell(event) {
     if (isGameOver) return;
     let cell = getCell(event);
     if (!isInitialized) initializeCell(cell.row, cell.col);
+    // Si la celda ya está revelada, se intenta hacer "chord"
+    if (cell.state === stateCell.revealed) {
+        chordCell(cell);
+        return;
+    }
     if (cell.state != stateCell.normal) return;
     if (cell.type == typeCell.mine) {
         revealAllMines();
@@ -22,6 +27,39 @@ function checkCell(event) {
     }
     revealCells();
     checkWinConditions();
+}
+
+function getAdjacentCells(cell) {
+    const adjacentCells = [];
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            // Ignora la propia celda
+            if (i === 0 && j === 0) continue;
+            const newRow = cell.row + i;
+            const newCol = cell.col + j;
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                adjacentCells.push(gameBoard[newRow][newCol]);
+            }
+        }
+    }
+    return adjacentCells;
+}
+
+// Función que realiza el "chord" en una celda revelada
+function chordCell(cell) {
+    const adjacentCells = getAdjacentCells(cell);
+    // Cuenta las celdas adyacentes que están marcadas como bandera
+    const flaggedCount = adjacentCells.filter(adj => adj.state === stateCell.flag).length;
+
+    // Solo procede si la cantidad de banderas coincide con el número indicado en la celda
+    if (flaggedCount !== cell.adjacentMines) return;
+
+    // Revela cada celda adyacente que aún no se haya revelado
+    adjacentCells.forEach(adjCell => {
+        if (adjCell.state === stateCell.normal) {
+            checkCell({ target: adjCell.element });
+        }
+    });
 }
 
 function initializeCell(row, col) {
