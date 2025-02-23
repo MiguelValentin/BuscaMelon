@@ -2,6 +2,9 @@
 let cellsToReveal = [];
 let isSeedLocked = false;
 
+let hintUsed = false; // Controla si se usó la pista
+let hintAvailable = true; // Habilita/deshabilita el botón
+
 let isInitialized = false;
 
 function checkCell(event) {
@@ -60,6 +63,42 @@ function chordCell(cell) {
             checkCell({ target: adjCell.element });
         }
     });
+}
+
+function useHint() {
+    // if (!hintAvailable || hintUsed || isGameOver) return;
+    if (isGameOver) return;
+
+    // Buscar celdas reveladas con número para encontrar pistas seguras
+    const safeCells = [];
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const cell = gameBoard[i][j];
+            if (cell.state === stateCell.revealed &&
+                cell.type === typeCell.number &&
+                cell.adjacentMines > 0) {
+                safeCells.push(...getAdjacentSafeCells(cell));
+            }
+        }
+    }
+
+    // Seleccionar una celda segura al azar
+    if (safeCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * safeCells.length);
+        const safeCell = safeCells[randomIndex];
+        safeCell.element.classList.add('hint-highlight');
+        checkCell({ target: safeCell.element });
+        hintUsed = true;
+        startTime -=100000;
+    }
+
+}
+
+function getAdjacentSafeCells(cell) {
+    return getAdjacentCells(cell).filter(adjCell =>
+        adjCell.state === stateCell.normal &&
+        adjCell.type !== typeCell.mine
+    );
 }
 
 function initializeCell(row, col) {

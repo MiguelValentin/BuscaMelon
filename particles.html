@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <script>
+        (function() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Configuración ajustada para mejor rendimiento
+            const CONFIG = {
+                PARTICLE_COUNT: 200,      // Reducido de 500 a 200
+                MOUSE_RADIUS: 120,
+                MOUSE_INFLUENCE: 0.5,    // Aumentada la influencia
+                CONNECT_DISTANCE: 70,    // Distancia reducida
+                LINE_OPACITY: 0.1,       // Opacidad reducida
+                PARTICLE_SPEED: 0.7,     // Velocidad aumentada (original 0.35)
+                FPS_CAP: 60,
+                COLOR: [100, 200, 255]   // Color más claro
+            };
+
+            // Variables de estado
+            let particles = [];
+            let mouse = { x: -9999, y: -9999 };
+            let lastFrame = 0;
+            let animationFrameId;
+
+            // Sistema de partículas optimizado
+            class ParticleSystem {
+                constructor(count) {
+                    this.count = count;
+                    this.positions = new Float32Array(count * 2);
+                    this.velocities = new Float32Array(count * 2);
+                    this.init();
+                }
+
+                init() {
+                    for(let i = 0; i < this.count; i++) {
+                        this.positions[i*2] = Math.random() * canvas.width;
+                        this.positions[i*2+1] = Math.random() * canvas.height;
+                        this.velocities[i*2] = (Math.random() - 0.5) * CONFIG.PARTICLE_SPEED * 2; // Velocidad duplicada
+                        this.velocities[i*2+1] = (Math.random() - 0.5) * CONFIG.PARTICLE_SPEED * 2;
+                    }
+                }
+
+                update(deltaTime) {
+                    const mouseX = mouse.x;
+                    const mouseY = mouse.y;
+                    const influence = CONFIG.MOUSE_INFLUENCE;
+                    const radiusSq = CONFIG.MOUSE_RADIUS ** 2;
+
+                    for(let i = 0; i < this.count; i++) {
+                        let x = this.positions[i*2];
+                        let y = this.positions[i*2+1];
+                        
+                        // Interacción con mouse más rápida
+                        if(mouseX > 0 && mouseY > 0) {
+                            const dx = x - mouseX;
+                            const dy = y - mouseY;
+                            const distSq = dx*dx + dy*dy;
+                            
+                            if(distSq < radiusSq) {
+                                const force = (1 - distSq / radiusSq) * influence * 1.5; // Fuerza aumentada
+                                this.velocities[i*2] += (dx / Math.sqrt(distSq)) * force;
+                                this.velocities[i*2+1] += (dy / Math.sqrt(distSq)) * force;
+                            }
+                        }
+
+                        // Actualización de posición más rápida
+                        x += this.velocities[i*2] * deltaTime * 1.2; // Multiplicador de velocidad
+                        y += this.velocities[i*2+1] * deltaTime * 1.2;
+
+                        // Rebotes más energéticos
+                        if(x < 0 || x > canvas.width) this.velocities[i*2] *= -0.9;
+                        if(y < 0 || y > canvas.height) this.velocities[i*2+1] *= -0.9;
+
+                        this.positions[i*2] = x;
+                        this.positions[i*2+1] = y;
+                    }
+                }
+            }
+
+            const particleSystem = new ParticleSystem(CONFIG.PARTICLE_COUNT);
+
+            // Configuración inicial optimizada
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                particleSystem.init();
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            resize();
+
+            // Eventos de mouse simplificados
+            canvas.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                mouse.x = -9999;
+                mouse.y = -9999;
+            });
+
+            // Bucle de renderizado ultra optimizado
+            function render(timestamp) {
+                animationFrameId = requestAnimationFrame(render);
+                
+                const deltaTime = (timestamp - lastFrame) / 16.67;
+                if(deltaTime < (1000 / CONFIG.FPS_CAP)) return;
+                lastFrame = timestamp;
+
+                // Fondo con efecto de rastro más suave
+                ctx.fillStyle = 'rgba(5, 10, 20, 0.15)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Actualización más rápida
+                particleSystem.update(deltaTime);
+
+                // Dibujado directo sin conexiones complejas
+                ctx.fillStyle = `rgb(${CONFIG.COLOR.join(',')})`;
+                const positions = particleSystem.positions;
+                ctx.beginPath();
+                for(let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
+                    ctx.moveTo(positions[i*2], positions[i*2+1]);
+                    ctx.arc(positions[i*2], positions[i*2+1], 1.2, 0, Math.PI*2);
+                }
+                ctx.fill();
+            }
+
+            // Control de animación
+            function start() {
+                if(!animationFrameId) render();
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                document.hidden ? cancelAnimationFrame(animationFrameId) : start();
+            });
+
+            start();
+        })();
+    </script>
+</body>
+</html>

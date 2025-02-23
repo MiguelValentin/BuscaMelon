@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorfismo Animado</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e0e0e0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .neumorph-container {
+            position: relative;
+            padding: 2rem;
+            border-radius: 30px;
+            background: #e0e0e0;
+            box-shadow:  20px 20px 60px #bebebe,
+                        -20px -20px 60px #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .neumorph-container:hover {
+            box-shadow:  10px 10px 30px #bebebe,
+                        -10px -10px 30px #ffffff;
+            transform: translateY(5px);
+        }
+
+        .symbol {
+            font-size: 4rem;
+            color: #4a4a4a;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .overline {
+            text-decoration: overline;
+            font-weight: bold;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Efecto de profundidad adicional */
+        .neumorph-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 30px;
+            box-shadow: inset 5px 5px 10px #bebebe,
+                       inset -5px -5px 10px #ffffff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .neumorph-container:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="neumorph-container">
+        <div class="symbol">
+            <span class="overline">O</span>
+            <span>&sdot;</span>
+            <span class="overline">O′</span>
+        </div>
+    </div>
+</body>
+</html>

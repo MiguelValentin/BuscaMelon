@@ -1,5 +1,6 @@
 
 const resetButton = document.getElementById('reset-button');
+const hintButton = document.getElementById('hint-button');
 const seedInput = document.getElementById('seed-input');
 const themeToggleBtn = document.getElementById('theme-toggle');
 const padlockToggleBtn = document.getElementById('padlock-toggle');
@@ -16,6 +17,7 @@ function setActionsUI() {
     checkingMobileUI();
     document.oncontextmenu = disableContextmenu // deshabilita el menú contextual
     resetButton.addEventListener('mousedown', resetGameButton);
+    hintButton.addEventListener('click', clickHintButton);
     seedInput.addEventListener('input', updateSeedInput);
     themeToggleBtn.addEventListener('click', toggleTheme);
     padlockToggleBtn.addEventListener('click', clickToglePadlock);
@@ -68,6 +70,10 @@ function addCellEvents(element) {
 function resetGameButton() {
     resetPlay();
     resetGame();
+}
+
+function clickHintButton() {
+    useHint();
 }
 
 function updateSeedInput() {

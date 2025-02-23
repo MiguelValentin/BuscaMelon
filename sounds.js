@@ -44,6 +44,6 @@ function explosionPlay() {
 }
 
 function gameOverPlay() {
-    soundWaa.volume = 0.3;
+    soundWaa.volume = 0;
     playSound(soundWaa);
 }

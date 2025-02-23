@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto Neumorfismo 3D</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0; /* Fondo gris claro para contraste */
+            font-family: Arial, sans-serif;
+        }
+
+        .neumorphic-text {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333; /* Color base del texto */
+            text-transform: uppercase; /* Letras mayúsculas para un estilo más impactante */
+            /* Efecto neumorfista mediante text-shadow */
+            text-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.2), /* Sombra inferior derecha */
+                -4px -4px 8px rgba(255, 255, 255, 0.7); /* Sombra superior izquierda */
+            /* Espaciado entre letras para un look más definido */
+            letter-spacing: 5px;
+            /* Ajuste de posición para centrar mejor */
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="neumorphic-text">THE NEW DESIGN</div>
+</body>
+</html>
