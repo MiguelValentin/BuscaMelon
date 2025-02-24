@@ -21,8 +21,6 @@ function playSound(sound) {
 }
 
 function winPlay() {
-    soundFlag.currentTime = 1;
-    soundCell.currentTime = 1;
     playSound(soundWin);
 }
 
