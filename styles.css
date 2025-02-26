@@ -659,6 +659,7 @@ h1 {
     /* Tablero de juego */
     #game {
         grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+        animation: none;
         /* Ajustar la cantidad de columnas según el ancho de la pantalla */
         /* padding: 5px; */
         /* Reducir el padding del tablero */
