@@ -4,6 +4,7 @@ let soundFlag = new Audio('sounds/flag.mp3');
 let soundWin = new Audio('sounds/win.mp3');
 let soundReset = new Audio('sounds/reset.mp3');
 let soundCell = new Audio('sounds/cell.mp3');
+let soundCellsGroup = new Audio('sounds/cells group.mp3');
 let soundWaa = new Audio('sounds/Waa.mp3');
 // // -------------
 
@@ -31,6 +32,11 @@ function flagPlay() {
 function cellPlay() {
     playSound(soundCell);
 }
+
+function cellsGroupPlay() {
+    playSound(soundCellsGroup);
+}
+
 
 function resetPlay() {
     playSound(soundReset);

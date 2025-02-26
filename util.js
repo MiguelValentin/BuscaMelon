@@ -26,7 +26,6 @@ function generateRandomSeed() {
 function initValues() {
     if (!isSeedLocked)
         isInitialized = false;
-    hintUsed = false;
     minesToReveal = [];
     counterStarted = false;
     isGameOver = false;
@@ -57,6 +56,7 @@ function disableContextmenu() {
 }
 
 function particleAnim() {
+    if (isMobile) return;
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -165,4 +165,4 @@ function particleAnim() {
     animate();
 }
 
-particleAnim();
+setTimeout(() => particleAnim(), 100);

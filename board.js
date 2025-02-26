@@ -6,6 +6,12 @@ let cols = 10;
 let gameBoard = [];
 let gameElement = document.getElementById('game');
 
+let gameContent = {
+    mines: [],
+    voids: [],
+    numbers: []
+}
+
 const mineCell = "mine";
 
 const numberCell = "number";
@@ -20,6 +26,19 @@ const typeCell = { mine: 'mine', number: 'number', void: 'void', null: 'null' }
 const stateCell = { normal: 'normal', revealed: 'revealed', flag: 'flag' };
 
 let optionLevel = 1;
+
+function createCell(i, j, cell) {
+    return {
+        element: cell,
+        type: typeCell.null,
+        state: stateCell.normal,
+        revealed: false,
+        flagged: false,
+        adjacentMines: 0,
+        row: i,
+        col: j
+    }
+}
 
 function changeLevel() {
     optionLevel = (optionLevel + 1) % 3; // Actualiza el nivel de opción en base a un ciclo de tres niveles posibles(0,1,2).
@@ -100,19 +119,25 @@ function findVoidCell(row = 0, col = 0) {
 
 // Función para plantar minas usando la semilla
 function plantMines() {
+    gameContent.mines = [];
     let minesPlanted = 0;
     let rng = mulberry32(seed); // Generador de números aleatorios con semilla
-    while (minesPlanted < minesCount) {
+    // while (minesPlanted < minesCount) {
+    while (gameContent.mines.length < minesCount) {
         let row = Math.floor(rng() * rows);
         let col = Math.floor(rng() * cols);
         let cell = gameBoard[row][col]
         if (cell.type == typeCell.null) {
             cell.type = typeCell.mine;
-            minesPlanted++;
+            // minesPlanted++;
+            gameContent.mines.push(cell);
         }
     }
 }
 function updatePlantedMines(offsetRow = 0, offsetCol = 0) {
+    gameContent.mines = [];
+    gameContent.voids = [];
+    gameContent.numbers = [];
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             let fg = gameBoard[i][j];
@@ -125,7 +150,8 @@ function updatePlantedMines(offsetRow = 0, offsetCol = 0) {
     }
     let minesPlanted = 0;
     let rng = mulberry32(seed); // Generador de números aleatorios con semilla
-    while (minesPlanted < minesCount) {
+    // while (minesPlanted < minesCount) {
+    while (gameContent.mines.length < minesCount) {
         let row = Math.floor(rng() * rows);
         let col = Math.floor(rng() * cols);
         if (offsetRow != 0) {
@@ -139,12 +165,19 @@ function updatePlantedMines(offsetRow = 0, offsetCol = 0) {
             if (col < 0) col = col + cols;
         }
         let cell = gameBoard[row][col]
+        setMine(cell);
+        // if (cell.type == typeCell.null) {
+        //     cell.type = typeCell.mine;
+        //     minesPlanted++;
+        //     gameContent.mines.push(cell);
+        // }
+    }
+}
 
-        if (cell.type == typeCell.null) {
-            cell.type = typeCell.mine;
-
-            minesPlanted++;
-        }
+function setMine(cell) {
+    if (cell.type == typeCell.null) {
+        cell.type = typeCell.mine;
+        gameContent.mines.push(cell);
     }
 }
 
@@ -160,15 +193,21 @@ function mulberry32(a) {
 
 // Función para calcular el número de minas adyacentes para cada celda
 function calculateAdjacentMines() {
+    gameContent.voids = []
+    gameContent.numbers = [];
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             let cell = gameBoard[i][j];
             if (cell.type != typeCell.mine) {
                 let adjacentMines = countAdjacentMines(i, j);
-                if (adjacentMines == 0)
+                if (adjacentMines == 0) {
                     cell.type = typeCell.void;
-                else
+                    gameContent.voids.push(cell);
+                }
+                else {
                     cell.type = typeCell.number;
+                    gameContent.numbers.push(cell);
+                }
                 cell.adjacentMines = adjacentMines;
                 addColorTextCell(cell);
             }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,16 +21,16 @@
             padding: 2rem;
             border-radius: 30px;
             background: #e0e0e0;
-            box-shadow:  20px 20px 60px #bebebe,
-                        -20px -20px 60px #ffffff;
+            box-shadow: 20px 20px 60px #bebebe,
+                -20px -20px 60px #ffffff;
             transition: all 0.3s ease;
             cursor: pointer;
             animation: float 3s ease-in-out infinite;
         }
 
         .neumorph-container:hover {
-            box-shadow:  10px 10px 30px #bebebe,
-                        -10px -10px 30px #ffffff;
+            box-shadow: 10px 10px 30px #bebebe,
+                -10px -10px 30px #ffffff;
             transform: translateY(5px);
         }
 
@@ -47,9 +48,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-10px);
             }
@@ -65,7 +69,7 @@
             bottom: 0;
             border-radius: 30px;
             box-shadow: inset 5px 5px 10px #bebebe,
-                       inset -5px -5px 10px #ffffff;
+                inset -5px -5px 10px #ffffff;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -73,15 +77,46 @@
         .neumorph-container:hover::before {
             opacity: 1;
         }
+
+        .temp {
+            width: 47px;
+            height: 47px;
+            background-color: #bb5959;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .temp::before {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background-color: #4a4a4a;
+            border-radius: 7px;
+            z-index: 1;
+        }
+
+        .temp:hover::before {
+            background-color: aqua;
+        }
+
+        .temp:active::before {
+            background-color: red;
+        }
     </style>
 </head>
+
 <body>
     <div class="neumorph-container">
         <div class="symbol">
-            <span class="overline">O</span>
+            <!-- <span class="overline">O</span>
             <span>&sdot;</span>
-            <span class="overline">O′</span>
+            <span class="overline">O′</span> -->
         </div>
+
+    </div>
+    <div class="temp">
     </div>
 </body>
+
 </html>

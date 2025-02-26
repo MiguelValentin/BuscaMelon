@@ -117,11 +117,11 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    /* background-color: var(--background-color); */
+    background-color: var(--background-color);
     /* background-image: linear-gradient(to bottom right, var(--light-glow-color), var(--light-base-color)); */
     /* background-image: url('background-pattern2.png'), linear-gradient(to bottom right, var(--light-glow-color), var(--light-base-color)); */
     user-select: none;
-    /* background-image: url('background-pattern2.png'); */
+    background-image: url('background-pattern2.png');
     /* Imagen de fondo en patrón */
     background-repeat: repeat;
     /* Repetir la imagen en el fondo */
@@ -232,7 +232,7 @@ h1 {
 
 }
 
-#hint-button {
+#search-button {
     width: 50px;
     padding: 10px;
     font-size: 1.2em;
@@ -249,7 +249,7 @@ h1 {
     /* transition: transform 0.2s; */
 }
 
-#hint-button:active {
+#search-button:active {
     transform: translateY(1px);
     box-shadow: 0 0px #ffffff00;
 
@@ -387,6 +387,54 @@ h1 {
     animation: border-glow 2s linear infinite;
 }
 
+@keyframes boardExplosion {
+    0% {
+        box-shadow: 0px 0px 5px #ad39f036;
+        transform: scale(1);
+    }
+
+    10% {
+        border-radius: 0px;
+        transform: scale(0.9);
+    }
+
+    50% {
+        border-radius: 40px;
+        transform: scale(1.06);
+        box-shadow: 0px 0px 5px #ad39f0;
+    }
+
+    100% {
+        box-shadow: 0px 0px 10px #ad39f036;
+        transform: scale(1);
+    }
+}
+
+@keyframes boardReveal {
+    0% {
+        box-shadow: 0px 0px 5px #ad39f036;
+        transform: scale(1);
+    }
+
+    5% {
+
+        transform: scale(0.99);
+    }
+
+    50% {
+        box-shadow: 0px 0px 3px #ad39f04d;
+        transform: scale(1);
+    }
+}
+
+#game.board-explosion {
+    animation: boardExplosion 0.5s ease-in-out;
+}
+
+#game.reveal {
+    animation: boardReveal 0.3s ease-in-out;
+}
+
 @keyframes border-glow {
     0% {
         box-shadow: 0px 0px 5px #ad39f036;
@@ -436,6 +484,11 @@ h1 {
     background-color: var(--revealcell-color);
     box-shadow: inset 4px 4px 7px var(--shadow-color), inset -4px -4px 7px var(--glow-color);
     animation: revealAnimation 0.15s ease-in-out;
+}
+
+.cell.hint {
+    border: 2px solid;
+    border-color: var(--light-text-color);
 }
 
 
@@ -568,7 +621,12 @@ h1 {
 
 /* Media Query para pantallas más pequeñas */
 @media (max-width: 768px) {
+
     /* Ajustes para dispositivos móviles */
+    body {
+        background-color: var(--background-color);
+        background-image: url('background-pattern2.png');
+    }
 
     /* Título */
     h1 {
@@ -620,6 +678,12 @@ h1 {
 }
 
 @media (max-width: 380px) {
+
+    body {
+        background-color: var(--background-color);
+        background-image: url('background-pattern2.png');
+    }
+
     .cell {
         line-height: 30px;
     }

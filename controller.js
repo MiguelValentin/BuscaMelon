@@ -1,18 +1,14 @@
-
 let cellsToReveal = [];
 let isSeedLocked = false;
-
-let hintUsed = false; // Controla si se usó la pista
-let hintAvailable = true; // Habilita/deshabilita el botón
 
 let isInitialized = false;
 
 function checkCell(event) {
-
     if (isGameOver) return;
     let cell = getCell(event);
+
     if (!isInitialized) initializeCell(cell.row, cell.col);
-    // Si la celda ya está revelada, se intenta hacer "chord"
+    // Si la celda ya está revelada, se intenta hacer "chord"(liberar celdas adyacentes que no tengan minas)
     if (cell.state === stateCell.revealed) {
         chordCell(cell);
         return;
@@ -28,6 +24,11 @@ function checkCell(event) {
     if (cell.type == typeCell.void) {
         revealAdjacentCells(cell.row, cell.col);
     }
+}
+
+function cellAction(event) {
+    checkCell(event);
+    if (cellsToReveal.length === 0) return;
     revealCells();
     checkWinConditions();
 }
@@ -63,11 +64,25 @@ function chordCell(cell) {
             checkCell({ target: adjCell.element });
         }
     });
+    const board = document.getElementById('game');
+    if (board && cellsToReveal.length >= 1) {
+        // board.classList.add('chord-effect');
+        // setTimeout(() => board.classList.remove('chord-effect'), 300);
+    }
 }
 
-function useHint() {
+function useSearch() {
     // if (!hintAvailable || hintUsed || isGameOver) return;
-    if (isGameOver) return;
+    if (isGameOver || !isInitialized) return;
+    let tempContentVoids = gameContent.voids.filter((normalVoids) => normalVoids.state === stateCell.normal);
+    if (tempContentVoids.length > 0) {
+        let nVoid = tempContentVoids[Math.floor(Math.random() * tempContentVoids.length)];
+        nVoid.element.classList.add('hint');
+        cellAction({ target: nVoid.element });
+        startTime -= 100000;
+
+        return;
+    }
 
     // Buscar celdas reveladas con número para encontrar pistas seguras
     const safeCells = [];
@@ -86,10 +101,9 @@ function useHint() {
     if (safeCells.length > 0) {
         const randomIndex = Math.floor(Math.random() * safeCells.length);
         const safeCell = safeCells[randomIndex];
-        safeCell.element.classList.add('hint-highlight');
-        checkCell({ target: safeCell.element });
-        hintUsed = true;
-        startTime -=100000;
+        safeCell.element.classList.add('hint');
+        cellAction({ target: safeCell.element });
+        startTime -= 100000;
     }
 
 }
@@ -105,6 +119,15 @@ function initializeCell(row, col) {
     isInitialized = true;
     initializeBoard(row, col);
     setSeedInputText(row, col);
+    // setTimeout(() => showHint(), 200);
+
+}
+
+function showHint() {
+    let tempContentVoids = gameContent.voids.filter((normalVoids) => normalVoids.state === stateCell.normal);
+    if (tempContentVoids.length === 0) return;
+    let nVoid = tempContentVoids[Math.floor(Math.random() * tempContentVoids.length)];
+    nVoid.element.classList.add('hint');
 }
 
 function terminateGame() {
@@ -113,11 +136,18 @@ function terminateGame() {
 }
 
 function revealCells() {
-    cellPlay();
+    cellsToReveal.length > 1 ? cellsGroupPlay() : cellPlay();
     idleAnim();
     for (let index = 0; index < cellsToReveal.length; index++) {
         const element = cellsToReveal[index];
         revealCell(element);
+    }
+    if (cellsToReveal.length >= 4) {
+        const board = document.getElementById('game');
+        if (board) {
+            board.classList.add('reveal');
+            setTimeout(() => board.classList.remove('reveal'), 300);
+        }
     }
     cellsToReveal = [];
 }
@@ -132,7 +162,6 @@ function initializeCounter() {
     counterStarted = true;
     startTime = new Date().getTime();
     timer = setInterval(updateTimer, 1000);
-
 }
 
 function checkWinConditions() {
@@ -169,7 +198,7 @@ function revealAdjacentCells(row, col) {
     }
 }
 
-function flagCell(event) {
+function flagCellAction(event) {
     // console.log('click');
     if (isGameOver) return;
     let cell = getCell(event);
@@ -223,4 +252,11 @@ function revealAllMines() {
     }
     // Inicia la revelación secuencial
     revealNextMine(0);
+
+    //efecto de explosión en el tablero 
+    const board = document.getElementById('game');
+    if (board) {
+        board.classList.add('board-explosion');
+        setTimeout(() => board.classList.remove('board-explosion'), 500);
+    }
 }

@@ -1,6 +1,6 @@
 
 const resetButton = document.getElementById('reset-button');
-const hintButton = document.getElementById('hint-button');
+const searchButton = document.getElementById('search-button');
 const seedInput = document.getElementById('seed-input');
 const themeToggleBtn = document.getElementById('theme-toggle');
 const padlockToggleBtn = document.getElementById('padlock-toggle');
@@ -17,7 +17,7 @@ function setActionsUI() {
     checkingMobileUI();
     document.oncontextmenu = disableContextmenu // deshabilita el menú contextual
     resetButton.addEventListener('mousedown', resetGameButton);
-    hintButton.addEventListener('click', clickHintButton);
+    searchButton.addEventListener('click', clickSearchButton);
     seedInput.addEventListener('input', updateSeedInput);
     themeToggleBtn.addEventListener('click', toggleTheme);
     padlockToggleBtn.addEventListener('click', clickToglePadlock);
@@ -59,10 +59,12 @@ function clickLevelButton() {
 
 function addCellEvents(element) {
     if (isMobile) {
+        console.log("Celular");
         element.addEventListener('pointerdown', handlePointerDown);
         element.addEventListener('pointerup', handlePointerUp);
         element.addEventListener('pointerleave', handlePointerUp);  // Para cuando se arrastra fuera de la celda
     } else {
+        console.log("PC");
         element.addEventListener('mousedown', pressCellButton);
     }
 }
@@ -72,8 +74,8 @@ function resetGameButton() {
     resetGame();
 }
 
-function clickHintButton() {
-    useHint();
+function clickSearchButton() {
+    useSearch();
 }
 
 function updateSeedInput() {
@@ -105,16 +107,16 @@ function fixedInput() {
 //Si se presiona la celda desde una computadora
 function pressCellButton(event) {
     if (event.button == 0)
-        checkCell(event);
+        cellAction(event);
     else
-        flagCell(event);
+        flagCellAction(event);
 }
 
 //Si se presiona la celda desde un celular
 function handlePointerDown(event) {
     flagPlaced = false;  // Resetear el estado al presionar
     flagTimeout = setTimeout(() => {
-        flagCell(event);  // Colocar la bandera
+        flagCellAction(event);  // Colocar la bandera
         flagPlaced = true;  // Marcar que la bandera ha sido colocada
     }, 150);  // Tiempo de espera reducido (en milisegundos)
 }
@@ -122,6 +124,6 @@ function handlePointerDown(event) {
 function handlePointerUp(event) {
     if (!flagPlaced) {
         clearTimeout(flagTimeout);  // Cancela la acción si no se ha colocado la bandera
-        checkCell(event);
+        cellAction(event);
     }
 }
